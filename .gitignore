@@ -1,0 +1,8 @@
+dea*
+venv*
+.env*
+.ipynb*
+.KEY*
+.key*
+__pycache__
+Appvenv
