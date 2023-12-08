@@ -4,7 +4,7 @@
 +-------------------------------------------------------------------+  
 |        Guest VM running  AMD SEV SEV-ES SEV-SNP                   |
 | SEV-SNP ensures that all computations are encrypted within memory.|
-|    + within virtual machine +                                     |
+|    + within virtual machine +   Secure nested page                |
 | +-------------------+     +------------------------------------+  |   
 | | Python App        |     | .env.aes File                      |  | In my proof of concept i have made python application that securely processes data. 
 | |                   |     | (Stored on Back store)             |  | This application receives Point of Sale (POS) transaction data, encrypts it with a key derived from (ASP).
