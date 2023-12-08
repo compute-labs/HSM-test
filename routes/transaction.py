@@ -12,6 +12,7 @@ import boto3
 import json
 import datetime
 
+key = '/home/amd/derivedKey.bin'
 
 transaction_router = APIRouter(tags=["transaction"])
 
@@ -22,8 +23,6 @@ s3_client = boto3.client('s3', region_name='us-west-2',
 			aws_access_key_id=DevConfig.AWS_ID, 
 			aws_secret_access_key=DevConfig.AWS_KEY
 			)
-
-
 
 
 def encrypt_data(data, key_file):
@@ -46,6 +45,28 @@ def encrypt_data(data, key_file):
 	return result.stdout.decode()
 
 
+
+def decrypt_data(encrypted_data, key_file):
+	"""
+	Decrypt data using OpenSSL and a private key file.
+	"""
+	# Convert the data to a byte string
+	if isinstance(encrypted_data, str):
+		encrypted_data = encrypted_data.encode()
+
+	# Set up the OpenSSL command for decryption
+	cmd = ['openssl', 'enc', '-aes-256-cbc', '-d', '-base64', '-pass', f'file:{key_file}', '-pbkdf2']
+	# Run the command with the encrypted data
+	result = subprocess.run(cmd, input=encrypted_data, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+	if result.stderr:
+		raise Exception(f"OpenSSL error: {result.stderr.decode()}")
+
+	# Return the decrypted data
+	return result.stdout.decode()
+
+
+
 @transaction_router.post("/transaction")
 async def add_transaction(
 	request: Request,
@@ -57,7 +78,7 @@ async def add_transaction(
 	session=Depends(get_session)
 	):
 	
-	key = '/home/amd/derivedKey.bin'
+	#key = '/home/amd/derivedKey.bin'
 	encrypted_name = encrypt_data(name, key)
 	encrypted_email = encrypt_data(email, key)
 	encrypted_amount = encrypt_data(amount, key)
@@ -90,3 +111,25 @@ async def add_transaction(
 	return JSONResponse({"message": "success"})
 
 
+@transaction_router.get("/transaction")
+async def get_all_transactions(session=Depends(get_session)):
+	contacts = session.query(TransactionForm).all()
+	return contacts
+
+@transaction_router.get("/transaction/dec")
+async def get_all_transactions_decrypted(session=Depends(get_session)):
+	#key = '/app/derivedKey.bin'
+	contacts = session.query(TransactionForm).all()
+	decrypted_contacts = []
+	for contact in contacts:
+		decrypted_contact = {
+			'name': decrypt_data(contact.name, key),
+			'email': decrypt_data(contact.email, key),
+			'amount': decrypt_data(contact.amount, key),
+			'currency': decrypt_data(contact.currency, key),
+			'description': decrypt_data(contact.description, key),
+			'transaction_date': contact.transaction_date,
+			'ip': contact.ip
+			}
+		decrypted_contacts.append(decrypted_contact)
+	return decrypted_contacts

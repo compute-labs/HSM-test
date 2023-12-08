@@ -1,5 +1,9 @@
 #!/bin/bash
-
+# Check for sudo privileges
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as sudo user (use sudo)" 
+   exit 1
+fi
 # Define the paths to the encrypted and decrypted .env files
 ENCRYPTED_ENV_DB="/home/amd/App/postgres-docker/.env.db.aes"
 DECRYPTED_ENV_DB="/home/amd/App/postgres-docker/.env.db"

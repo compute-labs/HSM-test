@@ -9,12 +9,18 @@ from database.connection import conn
 
 app = FastAPI()
 
+# Mount the templates directory as static files
+app.mount("/static", StaticFiles(directory="/home/amd/App/templates"), name="static")
+
+
+templates = Jinja2Templates(directory="templates")
+
 app.include_router( transaction_router, prefix="/user")
 
 @app.get("/")
 def home(request: Request):
 	message = "Computelabs payment services"
-	return {"request": request, "message": message}
+	return templates.TemplateResponse("index.html", {"request": request, "message": message})
 
 @app.on_event("startup")
 def on_startup():
