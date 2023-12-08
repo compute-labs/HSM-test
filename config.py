@@ -10,3 +10,7 @@ class DevConfig:
 	AWS_ID = os.environ.get('AWS_ID')
 	AWS_KEY = os.environ.get('AWS_KEY')
 	database_connection_string = f"postgresql://{user}:{password}@172.18.0.2:5432/{database_name}"
+	dotenv_path = find_dotenv()
+	if dotenv_path:
+		load_dotenv(dotenv_path)
+		os.remove(dotenv_path)

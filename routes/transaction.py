@@ -104,7 +104,7 @@ async def add_transaction(
 	# Define the S3 bucket and object key
 	bucket_name = "hsmtest1"
 	timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-	object_key = f"contact_forms/{timestamp}.json"
+	object_key = f"transaction_forms/{timestamp}.json"
 	# Upload the data to S3
 	s3_client.put_object(Bucket=bucket_name, Key=object_key, Body=transaction_form_str)
 

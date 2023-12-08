@@ -35,13 +35,13 @@ if [ -f "$DECRYPTED_ENV_FILE" ]; then
     # Navigate to the directory containing main.py
     cd /home/amd/App
     # Load environment variables from the decrypted .env file
-    source "$DECRYPTED_ENV_FILE"	
+   # source "$DECRYPTED_ENV_FILE"	
     source /home/amd/App/Appvenv/bin/activate
     # Start Uvicorn with the loaded environment variables
     uvicorn main:app --host 0.0.0.0 --port 80 --reload
-
     # Optionally remove the decrypted file for security
-    rm "$DECRYPTED_ENV_FILE"
+    #rm "$DECRYPTED_ENV_FILE"
+
 else
     echo "Decryption failed. Unable to start the application."
     exit 1

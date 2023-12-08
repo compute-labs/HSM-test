@@ -6,3 +6,5 @@ venv*
 .key*
 __pycache__
 Appvenv
+*.bin
+.bin*
