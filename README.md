@@ -16,8 +16,8 @@
 ```
 +-------------------------------------------------------------------+  
 |        Guest VM running  AMD SEV SEV-ES SEV-SNP                   |
-| SEV-SNP ensures that all computations are encrypted within memory.|
-|    + within virtual machine +   Secure nested page                |
+| It ensures that all computations are encrypted within vm using    |
+|    SEV-ES  + Secure nested page (SEV-SNP)                         |
 | +-------------------+     +------------------------------------+  |   
 | | Python App        |     | .env.aes File                      |  | 
 | |                   |     | (Stored on Back store)             |  | 
@@ -41,6 +41,73 @@
                                   V 
 The entire application is under the governance of a key derived from an ASP(AMD Secure Processor)
 
+```
+
+```
++---------------------------------+
+|  AMD Secure Processor (AMD-SP)  |
+|  - Manages encryption keys      |
+|  - Integrated within the SOC    |
++---------------------------------+
+         |
+         | Encryption Key Management
+         v
++-----------------------------------+
+|  Memory Controller                |
+|  - Located on the CPU die         |
+|  - Includes AES Encryption Engine |
++-----------------------------------+
+         |
+         | Encryption/Decryption of Data
+         v
++-----------------------------------+
+|         DRAM                      |
+|  - Data encrypted when written    |
+|  - Data decrypted when read       |
++-----------------------------------+
+         |
+         | OS/Hypervisor Control (Page Tables)
+         v
++-----------------------------------+
+| OS or Hypervisor (HV)             |
+|  - Controls encrypted pages       |
+|  - Sets C-bit in page tables      |
++-----------------------------------+
+Diagram assumption of flow of data and control in the memory encryption process 
+```
+
+```
++------------------------------------------+
+|      AMD Secure Processor (AMD-SP)       |
+|  - Manages encryption keys               |
+|  - Integrated within the SOC             |
++------------------------------------------+
+         |
+         | Encryption Key Management
+         v
++-----------------------------------------+
+|        Memory Controller                |
+|  - Located on the CPU die               |
+|  - Includes AES Encryption Engine       |
++-----------------------------------------+
+         |
+         | Encryption/Decryption of Data
+         v
++----------------------------------------+
+|               DRAM                     |
+|  - Data encrypted when written         |
+|  - Data decrypted when read            |
++----------------------------------------+
+         |
+         | OS/Hypervisor Control
+         v
++-----------------------------------------+
+|   OS or Hypervisor (HV) with SEV-SNP    |
+|  - Controls encrypted pages             |
+|  - Manages VM isolation and integrity   |
+|  - Utilizes Reverse Map Table (RMP)     |
++-----------------------------------------+
+Diagram  assumption  Secure memory encryption + Secure Nested Paging (SEV-SNP)
 ```
 - Our application offers robust encryption and decryption capabilities, tailored for secure message handling and configuration management. Here's how it works:
 
