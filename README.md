@@ -48,12 +48,12 @@ The entire application is under the governance of a key derived from an ASP(AMD 
 
 - **Inbound Message Handling**: All incoming messages received via the POST method are encrypted.
 - **Secure Storage**: The encrypted messages are then securely stored in both our backend database and AWS S3 storage.
-Message Decryption:
-
+- **Message Decryption**: The GET method is used to decrypt stored messages, employing the ASP-derived key.
 - **Retrieval and Decryption**: Encrypted messages stored in the database can be decrypted using the GET method.
 - This decryption process utilizes a key derived from our Application Specific Processor (ASP), specifically the Versioned Chip Endorsement Key (VCEK).
-### Secure Configuration Management:
 
+  
+### Secure Configuration Management:
 - **.env.aes File Handling**: 
 - The application also decrypts the encrypted .env.aes file (located in the backend store) when it's loaded into the application.
 - In-Memory Processing: This decryption occurs in-memory (DRAM), using the same ASP-derived key.
@@ -66,4 +66,4 @@ Message Decryption:
 - Here on our AWS-hosted application in image is frequently targeted by bots and automated scripts searching for the .env file. However, due to our robust encryption, any sensitive information remains secure against unauthorized access. 
 - To ensures the protection of sensitive credentials and data by employing 256-bit CBC (Cipher Block Chaining) encryption.
 - This security measure is particularly crucial in the event of a web server compromise or if the AWS security services are breached.
-- If your data is deleted from AWS S3, neither AWS, any other storage service, nor an attacker with database access can read your sensitive data. This is because decrypting it without the encryption key would take thousands of years 
+- If your data is deleted from AWS S3, neither AWS, any other storage service, nor an attacker with database access can read your sensitive data. This is because decrypting it without the encryption key would take thousands+  years 
