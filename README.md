@@ -9,7 +9,7 @@
 
 ![Testing](https://img.shields.io/badge/Testing-Workaround%20Done-green?logo=check-circle)
 ![Profiling](https://img.shields.io/badge/Profiling-Ongoing-yellow?logo=hourglass-half)
-![Security](https://img.shields.io/badge/Security-In%20Progress-yellow?logo=shield-alt)
+![Security](https://img.shields.io/badge/Security%20Done-yellow?logo=shield-alt)
 
 
 ## Application Functionality Overview
