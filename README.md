@@ -34,7 +34,7 @@ The entire application is under the governance of a key derived from an ASP(AMD 
 
 ```
 ## Application Functionality Overview
-- **Our application offers robust encryption and decryption capabilities, tailored for secure message handling and configuration management. Here's how it works:
+- Our application offers robust encryption and decryption capabilities, tailored for secure message handling and configuration management. Here's how it works:
 
 ### Message Encryption and Storage:
 
@@ -42,8 +42,8 @@ The entire application is under the governance of a key derived from an ASP(AMD 
 - **Secure Storage**: The encrypted messages are then securely stored in both our backend database and AWS S3 storage.
 Message Decryption:
 
-- **Retrieval and Decryption: Encrypted messages stored in the database can be decrypted using the GET method.
-- **This decryption process utilizes a key derived from our Application Specific Processor (ASP), specifically the Versioned Chip Endorsement Key (VCEK).
+- **Retrieval and Decryption**: Encrypted messages stored in the database can be decrypted using the GET method.
+- This decryption process utilizes a key derived from our Application Specific Processor (ASP), specifically the Versioned Chip Endorsement Key (VCEK).
 ### Secure Configuration Management:
 
 - **.env.aes File Handling**: 
