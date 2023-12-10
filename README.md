@@ -132,5 +132,6 @@ Diagram  assumption  Secure memory encryption + Secure Nested Paging (SEV-SNP)
 ![Security Log Example](https://github.com/compute-labs/HSM-test/blob/master/Bots%26ScriptAttacks.png)
 - Here on our AWS-hosted application in image is frequently targeted by bots and automated scripts searching for the .env file. However, due to our robust encryption, any sensitive information remains secure against unauthorized access. 
 - To ensures the protection of sensitive credentials and data by employing 256-bit CBC (Cipher Block Chaining) encryption.
+- ![Encrypted .env file ](https://github.com/compute-labs/HSM-test/blob/master/Encrypted.png)
 - This security measure is particularly crucial in the event of a web server compromise or if the AWS security services are breached.
 - If your data is deleted from AWS S3, neither AWS, any other storage service, nor an attacker with database access can read your sensitive data. This is because decrypting it without the encryption key would take thousands+  years 
