@@ -113,7 +113,7 @@ Diagram  assumption  Secure memory encryption + Secure Nested Paging (SEV-SNP)
 
 ### Message Encryption and Storage:
 
-- **Inbound Message Handling**: All incoming messages received via the POST method are encrypted.
+- **Inbound Message Handling**: All incoming messages received via the POST method will be encrypted.
 - **Secure Storage**: The encrypted messages are then securely stored in both our backend database and AWS S3 storage.
 - **Message Decryption**: The GET method is used to decrypt stored messages, employing the ASP-derived key.
 - **Retrieval and Decryption**: Encrypted messages stored in the database can be decrypted using the GET method.
