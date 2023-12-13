@@ -130,6 +130,7 @@ Diagram  assumption  Secure memory encryption + Secure Nested Paging (SEV-SNP)
 ![Example Image](https://github.com/compute-labs/HSM-test/blob/a78d90fff4fad127f048661fe32c488f8be92f26/PoC.png)
 
 ```
+sudo ./startup.sh
 curl -X POST http://127.0.0.1/user/transaction \
     -F 'name=Danied' \
     -F 'email=Lucas@example.com' \
