@@ -8,6 +8,7 @@
 - [Use Case Illustration](#use-case-illustration)
 
 ![Testing](https://img.shields.io/badge/Testing-Workaround%20Done-green?logo=check-circle)
+![HSM-Testing](https://img.shields.io/badge/HSM--Testing-Pass%20Done-green?logo=check-circle)
 ![Profiling](https://img.shields.io/badge/Profiling-Ongoing-yellow?logo=hourglass-half)
 ![Security](https://img.shields.io/badge/Security%20Done-yellow?logo=shield-alt)
 
@@ -128,6 +129,18 @@ Diagram  assumption  Secure memory encryption + Secure Nested Paging (SEV-SNP)
 ### Working image
 ![Example Image](https://github.com/compute-labs/HSM-test/blob/a78d90fff4fad127f048661fe32c488f8be92f26/PoC.png)
 
+```
+curl -X POST http://127.0.0.1/user/transaction \
+    -F 'name=Danied' \
+    -F 'email=Lucas@example.com' \
+    -F 'amount=5000' \
+    -F 'currency=USD' \
+    -F 'description=Test transaction3'
+
+
+curl -X GET http://localhost/user/transaction
+curl -X GET http://127.0.0.1/user/transaction/dec
+```
 ## Use case  Illustration
 ![Security Log Example](https://github.com/compute-labs/HSM-test/blob/master/Bots%26ScriptAttacks.png)
 - Here on our AWS-hosted application in image is frequently targeted by bots and automated scripts searching for the .env file. However, due to our robust encryption, any sensitive information remains secure against unauthorized access. 
